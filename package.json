@@ -6,6 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@babel/runtime": "^7.22.6",
+    "@zesty-io/react-autolayout": "^1.0.0-beta.6",
+    "@zesty-io/webengine-json": "^0.1.0",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0"

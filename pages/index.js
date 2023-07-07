@@ -1,7 +1,25 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+// zesty packages
+import { toJSON } from '@zesty-io/webengine-json'; 
+import { AutoLayout } from "@zesty-io/react-autolayout";
 
-export default function Home() {
+// zesty config, this can also be configured to auto load, see https://github.com/zesty-io/nextjs-v13-starter
+import ZestyConfig from "/zesty.config.json";
+
+// Static site Zesty.io content example
+export const getStaticProps = async () => {
+  const content = await toJSON(ZestyConfig.stage,'about/')
+  return { props: { content } }
+}
+
+// Serverside Rendering Zesty.io content example
+// export const getServerSideProps = async () => {
+//   const content = await toJSON(ZestyConfig.stage,'about/')
+//   return { props: { content } }
+// }
+
+export default function Home({content}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -11,8 +29,15 @@ export default function Home() {
 
       <main>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+           Hello World <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        {/** Example simple content access */}
+        {content?.title && <h2>{content.title}</h2>}
+
+        <h3>Example zesty.config.json access {ZestyConfig.production}</h3>
+
+         {/** layouts example (optional) */}
+       {content?.meta?.layout?.json && <AutoLayout content={content} />}
 
         <p className={styles.description}>
           Get started by editing <code>pages/index.js</code>
