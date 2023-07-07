@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+
+
 // zesty packages
 import { toJSON } from '@zesty-io/webengine-json'; 
 import { AutoLayout } from "@zesty-io/react-autolayout";
@@ -8,18 +10,19 @@ import { AutoLayout } from "@zesty-io/react-autolayout";
 import ZestyConfig from "/zesty.config.json";
 
 // Static site Zesty.io content example
-export const getStaticProps = async () => {
-  const content = await toJSON(ZestyConfig.stage,'about/')
-  return { props: { content } }
-}
-
-// Serverside Rendering Zesty.io content example
-// export const getServerSideProps = async () => {
+// export const getStaticProps = async () => {
 //   const content = await toJSON(ZestyConfig.stage,'about/')
 //   return { props: { content } }
 // }
 
-export default function Home({content}) {
+// Serverside Rendering Zesty.io content example
+export const getServerSideProps = async (context) => {
+  console.log('the url can be used to auto fill the path',context.resolvedUrl)
+  const content = await toJSON(ZestyConfig.stage,'about/')
+  return { props: { content } }
+}
+
+export default function Home({router, content}) {
   return (
     <div className={styles.container}>
       <Head>
