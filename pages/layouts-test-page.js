@@ -1,8 +1,6 @@
-// zesty packages
 import { toJSON } from "@zesty-io/webengine-json";
 import { AutoLayout } from "@zesty-io/react-autolayout";
 
-// zesty config, this can also be configured to auto load, see https://github.com/zesty-io/nextjs-v13-starter
 import ZestyConfig from "/zesty.config.json";
 import ComponentSelector from "../components/ComponentSelector";
 
@@ -13,7 +11,6 @@ export const getServerSideProps = async (context) => {
 };
 
 const LayoutsTestPage = ({ content }) => {
-  console.log(content);
   return (
     <AutoLayout
       content={content}
